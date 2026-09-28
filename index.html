@@ -142,6 +142,17 @@
     font-size: 1.05rem;
   }
 
+  .grilla-dos .tarjeta ul {
+    margin: 0;
+    padding-left: 1.2rem;
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .grilla-dos .tarjeta li {
+    color: var(--color-texto-suave);
+  }
+
   .tarjeta.si h3::before { content: "✔ "; color: var(--color-acento); }
   .tarjeta.no h3::before { content: "✕ "; color: #a94442; }
 
@@ -316,7 +327,7 @@
   <header class="hero">
     <div class="contenedor">
       <span class="nombre">Cinthia Calle</span>
-      <h1>Le saco el trabajo repetitivo a tu negocio</h1>
+      <h1>Automatizo las tareas repetitivas de tu negocio para que vendas más sin sumar horas de trabajo</h1>
       <p>
         Soy Cinthia Calle y armo sistemas que hacen solas las tareas que hoy hacés a mano.
         Menos carga para tu equipo, sin cambiar las herramientas que ya usás.
@@ -331,9 +342,42 @@
       <h2>Le saco el trabajo repetitivo a tu negocio</h2>
       <span class="subrayado"></span>
       <p>
-        [Texto de presentación — placeholder]. Acá va una descripción más
-        extendida de quién es Cinthia, a qué se dedica y qué tipo de
-        automatizaciones arma para negocios como el tuyo.
+        Soy Cinthia Calle. Me dedico a desarrollo web, automatización, sistemas
+        y procesos para negocios que necesitan ordenar su operación y vender
+        más sin sumar más carga de trabajo.
+      </p>
+      <p>
+        <strong style="color: var(--color-texto);">A quién ayudo:</strong>
+        a pymes y negocios donde una o varias personas hacen a mano, todos los
+        días, tareas repetitivas: pasar datos de un lado a otro, cargar
+        planillas, mandar los mismos mensajes, actualizar estados a mano.
+      </p>
+      <p>
+        <strong style="color: var(--color-texto);">Qué problema te saco:</strong>
+        esas tareas consumen horas de trabajo, se hacen distinto según quién
+        las haga, y cuando alguien se olvida o se equivoca, el error se
+        arrastra a todo lo que sigue. Eso frena el crecimiento: no podés
+        vender más si cada venta te exige más horas de tareas manuales.
+      </p>
+      <p>
+        <strong style="color: var(--color-texto);">Qué te entrego:</strong>
+        un proceso automatizado a medida. Identificamos juntos qué tarea se
+        repite y le hace perder tiempo a tu equipo, y armamos un sistema que
+        la hace sola —o casi sola—, conectando las herramientas que ya usás,
+        sin que tengas que cambiar de plataforma.
+      </p>
+      <p>
+        <strong style="color: var(--color-texto);">En cuánto tiempo:</strong>
+        lo tenés funcionando y probado entre 1 y 2 semanas desde que me
+        contás el proceso, según cuántos pasos y herramientas estén
+        involucrados.
+      </p>
+      <p>
+        <strong style="color: var(--color-texto);">Qué tenés que poner vos:</strong>
+        una descripción clara de cómo hacés ese proceso hoy (aunque sea
+        informal), acceso a las herramientas que usás (planillas, WhatsApp,
+        mail, sistema de ventas) y alguien de tu equipo que valide que el
+        resultado es correcto antes de ponerlo a producir.
       </p>
     </div>
   </section>
@@ -344,18 +388,25 @@
       <h2>¿Te sirve esto?</h2>
       <span class="subrayado"></span>
       <p>
-        [Texto introductorio — placeholder]. Antes de seguir, es importante
-        que sepas si este servicio encaja con tu situación actual.
+        Antes de seguir, fijate si esto encaja con tu negocio hoy.
       </p>
 
       <div class="grilla-dos">
         <div class="tarjeta si">
           <h3>Te sirve si...</h3>
-          <p>[Placeholder] Vos o tu equipo repiten la misma tarea todos los días y se les escapan errores.</p>
+          <ul>
+            <li>Vos o tu equipo repiten la misma tarea todos los días, a mano.</li>
+            <li>Pasan datos entre planillas, WhatsApp, mail o el sistema de ventas.</li>
+            <li>Querés vender más sin sumar más horas de trabajo manual.</li>
+          </ul>
         </div>
         <div class="tarjeta no">
           <h3>No te sirve si...</h3>
-          <p>[Placeholder] Tu proceso cambia todo el tiempo y todavía no lo tenés claro vos mismo.</p>
+          <ul>
+            <li>La tarea necesita criterio humano caso por caso, no sigue un patrón.</li>
+            <li>Todavía no tenés claro, ni vos mismo, cómo hacés el proceso hoy.</li>
+            <li>Buscás algo instantáneo, sin dedicar un rato a contarme cómo trabajás.</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -460,7 +511,7 @@
             <span class="icono">+</span>
           </button>
           <div class="respuesta">
-            <p>[Respuesta placeholder — se completa después]</p>
+            <p>En general no. Trabajo sobre las herramientas que ya usás. Si hace falta algo puntual, te aviso antes de avanzar.</p>
           </div>
         </div>
 
@@ -470,7 +521,7 @@
             <span class="icono">+</span>
           </button>
           <div class="respuesta">
-            <p>[Respuesta placeholder — se completa después]</p>
+            <p>No hace falta capacitación técnica. Te dejo una guía simple y el sistema queda pensado para que lo use cualquiera del equipo.</p>
           </div>
         </div>
 
@@ -480,7 +531,7 @@
             <span class="icono">+</span>
           </button>
           <div class="respuesta">
-            <p>[Respuesta placeholder — se completa después]</p>
+            <p>Queda diseñado para avisar cuando algo no sale como esperado, así nadie se entera tarde ni a los golpes.</p>
           </div>
         </div>
 
@@ -490,7 +541,7 @@
             <span class="icono">+</span>
           </button>
           <div class="respuesta">
-            <p>[Respuesta placeholder — se completa después]</p>
+            <p>El sistema se ajusta. Los procesos evolucionan y la automatización se actualiza con ellos.</p>
           </div>
         </div>
 
@@ -500,7 +551,7 @@
             <span class="icono">+</span>
           </button>
           <div class="respuesta">
-            <p>[Respuesta placeholder — se completa después]</p>
+            <p>Lo que sigue un patrón repetible, sí. Lo que necesita criterio humano caso por caso, no —ahí automatizamos solo la parte previa o posterior.</p>
           </div>
         </div>
 
@@ -510,7 +561,7 @@
             <span class="icono">+</span>
           </button>
           <div class="respuesta">
-            <p>[Respuesta placeholder — se completa después]</p>
+            <p>Antes de ponerla a producir, la probamos juntos con casos reales y la validás vos mismo.</p>
           </div>
         </div>
 
