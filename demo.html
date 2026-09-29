@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demos interactivas — Cinthia Calle</title>
+
+<style>
+  /* ===== Variables de diseño (mismas que index.html) ===== */
+  :root {
+    --color-fondo: #faf9f7;
+    --color-fondo-alt: #f1efe9;
+    --color-texto: #232323;
+    --color-texto-suave: #5a5a54;
+    --color-acento: #2f5233;
+    --color-acento-suave: #eaf0e7;
+    --color-borde: #e2ded4;
+    --color-rojo: #a94442;
+    --radio: 14px;
+    --sombra: 0 4px 18px rgba(0,0,0,0.06);
+    --ancho-maximo: 980px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--color-fondo);
+    color: var(--color-texto);
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .contenedor {
+    max-width: var(--ancho-maximo);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  h1, h2, h3 { line-height: 1.25; margin-top: 0; }
+  p { color: var(--color-texto-suave); }
+
+  /* ===== Menú superior ===== */
+  .menu {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: #fff;
+    border-bottom: 1px solid var(--color-borde);
+  }
+
+  .menu .contenedor {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    padding: 0.9rem 1.5rem;
+  }
+
+  .menu a.marca {
+    font-weight: 700;
+    color: var(--color-acento);
+    text-decoration: none;
+  }
+
+  .menu a.volver {
+    color: var(--color-texto-suave);
+    text-decoration: none;
+    font-size: 0.92rem;
+  }
+
+  .menu a.volver:hover { color: var(--color-acento); }
+
+  /* ===== Intro ===== */
+  .intro {
+    padding: 3rem 0 2rem;
+    text-align: center;
+  }
+
+  .intro h1 {
+    font-size: clamp(1.7rem, 4.5vw, 2.4rem);
+    max-width: 720px;
+    margin: 0 auto 0.8rem;
+  }
+
+  .intro p {
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  /* ===== Botones ===== */
+  .boton {
+    display: inline-block;
+    background: var(--color-acento);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.9rem 2rem;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: transform 0.15s ease;
+    box-shadow: var(--sombra);
+  }
+
+  .boton:hover { transform: translateY(-2px); }
+
+  .boton-secundario {
+    display: inline-block;
+    background: #fff;
+    color: var(--color-acento);
+    border: 1.5px solid var(--color-acento);
+    font-weight: 600;
+    padding: 0.65rem 1.3rem;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 0.92rem;
+  }
+
+  .boton-secundario:hover { background: var(--color-acento-suave); }
+
+  /* ===== Tabs (selector de rubro) ===== */
+  .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: center;
+    margin: 1.5rem 0 2.5rem;
+  }
+
+  .tab-boton {
+    background: #fff;
+    border: 1px solid var(--color-borde);
+    border-radius: 999px;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.88rem;
+    color: var(--color-texto-suave);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .tab-boton:hover {
+    border-color: var(--color-acento);
+    color: var(--color-acento);
+  }
+
+  .tab-boton.activo {
+    background: var(--color-acento);
+    border-color: var(--color-acento);
+    color: #fff;
+    font-weight: 600;
+  }
+
+  /* ===== Paneles de demo ===== */
+  .panel { display: none; padding-bottom: 4rem; }
+  .panel.activo { display: block; }
+
+  .rubro-tag {
+    display: inline-block;
+    background: var(--color-acento-suave);
+    color: var(--color-acento);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    margin-bottom: 0.8rem;
+  }
+
+  .frase-antes,
+  .frase-despues {
+    border-left: 4px solid var(--color-borde);
+    padding: 0.7rem 1rem;
+    margin: 0.8rem 0 1.6rem;
+    background: #fff;
+    border-radius: 0 10px 10px 0;
+    font-size: 0.98rem;
+  }
+
+  .frase-antes { border-left-color: var(--color-rojo); }
+  .frase-despues { border-left-color: var(--color-acento); margin-top: 1.8rem; margin-bottom: 0; }
+
+  .panel h2 {
+    font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+    color: var(--color-texto);
+    margin-bottom: 0.2rem;
+  }
+
+  .tarjeta {
+    background: #fff;
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
+    padding: 1.4rem 1.6rem;
+    box-shadow: var(--sombra);
+  }
+
+  /* ===== Demo 1: WhatsApp ===== */
+  .whatsapp-demo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.4rem;
+  }
+
+  .wa-columna {
+    background: #fff;
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
+    padding: 1.2rem 1.3rem;
+  }
+
+  .wa-columna h3 { font-size: 0.95rem; margin-bottom: 0.9rem; color: var(--color-texto); }
+
+  .wa-lista-caos {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  .wa-lista-caos li {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    align-items: baseline;
+    border-bottom: 1px dashed var(--color-borde);
+    padding-bottom: 0.5rem;
+  }
+
+  .wa-nombre { font-weight: 700; color: var(--color-texto); }
+  .wa-msg { color: var(--color-texto-suave); flex: 1; min-width: 140px; }
+  .wa-hora { color: #a3a39a; font-size: 0.78rem; }
+
+  .wa-sin-responder {
+    color: var(--color-rojo);
+    font-weight: 600;
+    font-size: 0.82rem;
+    border-bottom: none !important;
+  }
+
+  .wa-chat {
+    min-height: 120px;
+    max-height: 220px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .wa-burbuja {
+    max-width: 85%;
+    padding: 0.55rem 0.85rem;
+    border-radius: 12px;
+    font-size: 0.88rem;
+  }
+
+  .wa-burbuja.cliente {
+    align-self: flex-start;
+    background: var(--color-fondo-alt);
+    color: var(--color-texto);
+    border-bottom-left-radius: 2px;
+  }
+
+  .wa-burbuja.bot {
+    align-self: flex-end;
+    background: var(--color-acento);
+    color: #fff;
+    border-bottom-right-radius: 2px;
+  }
+
+  .wa-botones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .wa-botones button {
+    background: var(--color-acento-suave);
+    color: var(--color-acento);
+    border: none;
+    border-radius: 999px;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .wa-botones button:hover { background: var(--color-acento); color: #fff; }
+
+  /* ===== Demo 2: Presupuesto ===== */
+  .presupuesto-demo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.4rem;
+    align-items: start;
+  }
+
+  .presupuesto-form {
+    background: #fff;
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
+    padding: 1.3rem 1.4rem;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .presupuesto-form label {
+    display: grid;
+    gap: 0.35rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--color-texto);
+  }
+
+  .presupuesto-form select,
+  .presupuesto-form input {
+    font-family: inherit;
+    font-size: 0.92rem;
+    padding: 0.55rem 0.7rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-borde);
+    background: var(--color-fondo);
+    color: var(--color-texto);
+  }
+
+  .presupuesto-resultado {
+    background: var(--color-acento-suave);
+    border-radius: var(--radio);
+    padding: 1.3rem 1.4rem;
+    font-size: 0.92rem;
+    color: var(--color-texto);
+  }
+
+  .presupuesto-resultado .total {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-acento);
+    margin: 0.4rem 0;
+  }
+
+  /* ===== Demo 3: Agenda ===== */
+  .agenda-demo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.4rem;
+  }
+
+  .agenda-col {
+    background: #fff;
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
+    padding: 1.2rem 1.3rem;
+  }
+
+  .agenda-col h3 { font-size: 0.95rem; margin-bottom: 0.9rem; }
+
+  .agenda-papel {
+    font-family: "Comic Sans MS", "Segoe Print", cursive, sans-serif;
+    color: #6b6b62;
+    font-size: 0.95rem;
+    line-height: 2;
+  }
+
+  .agenda-papel p { margin: 0; color: inherit; }
+  .agenda-papel p:nth-child(2) { text-decoration: line-through; opacity: 0.7; }
+  .agenda-papel p:nth-child(3) { transform: rotate(-1deg); }
+  .agenda-papel p:nth-child(5) { transform: rotate(1deg); }
+
+  .agenda-lista {
+    list-style: none;
+    margin: 0 0 1.1rem;
+    padding: 0;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .agenda-lista li {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--color-borde);
+    padding-bottom: 0.5rem;
+  }
+
+  .ag-hora { font-weight: 700; color: var(--color-acento); width: 52px; flex-shrink: 0; }
+  .ag-nombre { flex: 1; color: var(--color-texto); }
+
+  .ag-estado {
+    font-size: 0.78rem;
+    color: var(--color-texto-suave);
+    background: var(--color-fondo-alt);
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+  }
+
+  .agenda-lista li.enviado .ag-estado {
+    color: #fff;
+    background: var(--color-acento);
+  }
+
+  /* ===== Demo 4: Catálogo ===== */
+  .catalogo-demo {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 1.4rem;
+    align-items: start;
+  }
+
+  .catalogo-grilla {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.9rem;
+  }
+
+  .producto-card {
+    background: #fff;
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .producto-emoji { font-size: 2rem; margin-bottom: 0.3rem; }
+  .producto-nombre { font-weight: 600; font-size: 0.88rem; color: var(--color-texto); margin-bottom: 0.15rem; }
+  .producto-precio { font-size: 0.82rem; color: var(--color-texto-suave); margin-bottom: 0.6rem; }
+
+  .producto-stepper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+
+  .producto-stepper button {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--color-acento);
+    background: #fff;
+    color: var(--color-acento);
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .producto-stepper button:hover { background: var(--color-acento); color: #fff; }
+  .producto-stepper .cantidad { min-width: 18px; font-weight: 700; }
+
+  .catalogo-resumen {
+    background: #fff;
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
+    padding: 1.2rem 1.3rem;
+  }
+
+  .catalogo-resumen h3 { font-size: 0.95rem; margin-bottom: 0.7rem; }
+
+  #resumenLista {
+    list-style: none;
+    margin: 0 0 0.8rem;
+    padding: 0;
+    display: grid;
+    gap: 0.35rem;
+    font-size: 0.88rem;
+    color: var(--color-texto);
+  }
+
+  #resumenLista .vacio { color: var(--color-texto-suave); font-style: italic; }
+
+  .catalogo-total { font-size: 0.95rem; color: var(--color-texto); }
+
+  #mensajeWA {
+    width: 100%;
+    font-family: inherit;
+    font-size: 0.85rem;
+    padding: 0.7rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-borde);
+    background: var(--color-fondo);
+    color: var(--color-texto);
+    resize: none;
+    margin: 0.6rem 0 0.8rem;
+  }
+
+  .aviso-copiado {
+    color: var(--color-acento);
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-left: 0.6rem;
+  }
+
+  /* ===== Demo 5: Bandeja de consultas ===== */
+  .kanban-demo {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .kanban-columna {
+    background: var(--color-fondo-alt);
+    border-radius: var(--radio);
+    padding: 1rem;
+  }
+
+  .kanban-columna h3 { font-size: 0.9rem; margin-bottom: 0.8rem; text-align: center; }
+
+  .kanban-tarjetas { display: grid; gap: 0.7rem; min-height: 40px; }
+
+  .kanban-tarjeta {
+    background: #fff;
+    border: 1px solid var(--color-borde);
+    border-radius: 10px;
+    padding: 0.75rem 0.85rem;
+    font-size: 0.85rem;
+  }
+
+  .kanban-tarjeta .canal {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--color-texto-suave);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 0.2rem;
+  }
+
+  .kanban-tarjeta .nombre { font-weight: 700; color: var(--color-texto); }
+  .kanban-tarjeta .mensaje { color: var(--color-texto-suave); margin: 0.3rem 0 0.6rem; }
+
+  .kanban-tarjeta select {
+    width: 100%;
+    font-family: inherit;
+    font-size: 0.8rem;
+    padding: 0.35rem 0.5rem;
+    border-radius: 6px;
+    border: 1px solid var(--color-borde);
+    background: var(--color-fondo);
+    color: var(--color-texto);
+  }
+
+  /* ===== Demo 6: Ficha de cliente ===== */
+  .ficha-demo { max-width: 560px; margin: 0 auto; }
+
+  #buscarCliente {
+    width: 100%;
+    font-family: inherit;
+    font-size: 0.95rem;
+    padding: 0.75rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-borde);
+    background: #fff;
+    color: var(--color-texto);
+  }
+
+  .ficha-sugerencias {
+    display: grid;
+    gap: 0.3rem;
+    margin-top: 0.6rem;
+  }
+
+  .ficha-sugerencias button {
+    text-align: left;
+    background: #fff;
+    border: 1px solid var(--color-borde);
+    border-radius: 8px;
+    padding: 0.6rem 0.9rem;
+    font-size: 0.88rem;
+    color: var(--color-texto);
+    cursor: pointer;
+  }
+
+  .ficha-sugerencias button:hover { border-color: var(--color-acento); color: var(--color-acento); }
+
+  .ficha-resultado { margin-top: 1rem; }
+
+  .ficha-resultado .tarjeta h3 { margin-bottom: 0.2rem; }
+
+  .ficha-turno {
+    display: inline-block;
+    background: var(--color-acento-suave);
+    color: var(--color-acento);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    margin: 0.6rem 0 1rem;
+  }
+
+  .ficha-historial {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.4rem;
+    font-size: 0.88rem;
+  }
+
+  .ficha-historial li {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.6rem;
+    border-bottom: 1px dashed var(--color-borde);
+    padding-bottom: 0.4rem;
+    color: var(--color-texto);
+  }
+
+  .ficha-historial .fecha { color: var(--color-texto-suave); flex-shrink: 0; }
+  .ficha-vacio { color: var(--color-texto-suave); font-style: italic; }
+
+  /* ===== CTA final ===== */
+  .cta-final {
+    text-align: center;
+    padding: 3.5rem 0 4rem;
+    background: var(--color-fondo-alt);
+    border-top: 1px solid var(--color-borde);
+  }
+
+  .cta-final .tarjeta { padding: 2.6rem 2rem; max-width: 620px; margin: 0 auto; }
+  .cta-final .boton { margin-top: 1.3rem; }
+
+  footer {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    font-size: 0.85rem;
+    color: var(--color-texto-suave);
+  }
+
+  footer a { color: var(--color-acento); }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 700px) {
+    .whatsapp-demo,
+    .presupuesto-demo,
+    .agenda-demo,
+    .catalogo-demo,
+    .kanban-demo {
+      grid-template-columns: 1fr;
+    }
+
+    .catalogo-grilla { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ===================== MENÚ ===================== -->
+  <nav class="menu">
+    <div class="contenedor">
+      <a href="index.html" class="marca">Cinthia Calle</a>
+      <a href="index.html#agenda" class="volver">← Volver al sitio</a>
+    </div>
+  </nav>
+
+  <!-- ===================== INTRO ===================== -->
+  <header class="intro">
+    <div class="contenedor">
+      <h1>Probá cómo se ve la automatización en tu rubro</h1>
+      <p>
+        Son 6 ejemplos de rubros distintos, con datos inventados, para que
+        veas la idea general. La versión real se arma con tus datos, tus
+        horarios y tus productos.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <div class="contenedor">
+
+      <!-- Selector de demo -->
+      <div class="tabs" id="tabs">
+        <button class="tab-boton activo" data-target="demo-whatsapp" type="button">👗 Comercio de ropa</button>
+        <button class="tab-boton" data-target="demo-presupuesto" type="button">🔧 Taller mecánico</button>
+        <button class="tab-boton" data-target="demo-agenda" type="button">🩺 Consultorio</button>
+        <button class="tab-boton" data-target="demo-catalogo" type="button">🥐 Panadería</button>
+        <button class="tab-boton" data-target="demo-consultas" type="button">💅 Estética</button>
+        <button class="tab-boton" data-target="demo-ficha" type="button">🦷 Dentista</button>
+      </div>
+
+      <!-- ===================== 1. WHATSAPP DE MENTIRA ===================== -->
+      <section id="demo-whatsapp" class="panel activo">
+        <span class="rubro-tag">Ejemplo: comercio de ropa</span>
+        <h2>El WhatsApp del local</h2>
+        <p class="frase-antes">🔴 Antes: los mensajes se amontonan y las mismas preguntas de siempre quedan sin responder por horas.</p>
+
+        <div class="whatsapp-demo">
+          <div class="wa-columna">
+            <h3>Bandeja real (sin ordenar)</h3>
+            <ul class="wa-lista-caos">
+              <li><span class="wa-nombre">Vale</span><span class="wa-msg">Hola, ¿tienen la campera talle M?</span><span class="wa-hora">09:14</span></li>
+              <li><span class="wa-nombre">Fede R.</span><span class="wa-msg">Buenas, ¿hasta qué hora abren hoy?</span><span class="wa-hora">09:41</span></li>
+              <li><span class="wa-nombre">Male</span><span class="wa-msg">¿Cuánto sale el jean tiro alto?</span><span class="wa-hora">10:02</span></li>
+              <li><span class="wa-nombre">Nico</span><span class="wa-msg">¿Siguen teniendo el buzo negro?</span><span class="wa-hora">10:30</span></li>
+              <li><span class="wa-nombre">+54 9 11...</span><span class="wa-msg">precio remera básica</span><span class="wa-hora">11:05</span></li>
+              <li class="wa-sin-responder">⚠ 5 mensajes sin responder</li>
+            </ul>
+          </div>
+
+          <div class="wa-columna">
+            <h3>Con respuestas automáticas</h3>
+            <div class="wa-chat" id="waChat">
+              <div class="wa-burbuja cliente">Hola! ¿Tienen la campera talle M?</div>
+            </div>
+            <div class="wa-botones">
+              <button type="button" data-respuesta="horarios">Horarios</button>
+              <button type="button" data-respuesta="precios">Precios</button>
+              <button type="button" data-respuesta="stock">¿Hay stock?</button>
+            </div>
+          </div>
+        </div>
+
+        <p class="frase-despues">🟢 Después: el cliente toca un botón y recibe la respuesta al instante, sin que nadie del local escriba nada.</p>
+      </section>
+
+      <!-- ===================== 2. ARMADOR DE PRESUPUESTO ===================== -->
+      <section id="demo-presupuesto" class="panel">
+        <span class="rubro-tag">Ejemplo: taller mecánico</span>
+        <h2>Presupuesto al toque</h2>
+        <p class="frase-antes">🔴 Antes: cada presupuesto se arma a mano, a las apuradas, y cambia según quién atienda ese día.</p>
+
+        <div class="presupuesto-demo">
+          <form class="presupuesto-form" id="formPresupuesto">
+            <label>Servicio
+              <select id="ppServicio">
+                <option value="aceite">Cambio de aceite y filtro</option>
+                <option value="frenos">Cambio de pastillas de freno</option>
+                <option value="alineacion">Alineación y balanceo</option>
+                <option value="diagnostico">Diagnóstico general</option>
+              </select>
+            </label>
+            <label>Cantidad de vehículos
+              <input type="number" id="ppCantidad" min="1" max="10" value="1">
+            </label>
+            <label>Urgencia
+              <select id="ppUrgencia">
+                <option value="normal">Normal (2 a 3 días)</option>
+                <option value="urgente">Urgente (mismo día)</option>
+              </select>
+            </label>
+            <label>Zona
+              <select id="ppZona">
+                <option value="taller">Lo trae al taller</option>
+                <option value="domicilio">A domicilio</option>
+              </select>
+            </label>
+          </form>
+
+          <div class="presupuesto-resultado" id="ppResultado"></div>
+        </div>
+
+        <p class="frase-despues">🟢 Después: el presupuesto sale solo, con el mismo criterio siempre, en segundos.</p>
+      </section>
+
+      <!-- ===================== 3. ANTES/DESPUÉS DE AGENDA ===================== -->
+      <section id="demo-agenda" class="panel">
+        <span class="rubro-tag">Ejemplo: consultorio médico</span>
+        <h2>La agenda de turnos</h2>
+        <p class="frase-antes">🔴 Antes: los turnos se anotan en una libreta o en post-its, y es fácil que se pisen dos pacientes a la misma hora.</p>
+
+        <div class="agenda-demo">
+          <div class="agenda-col">
+            <h3>Agenda de papel</h3>
+            <div class="agenda-papel">
+              <p>Lun 9:00 - Pérez?? o Pérez R.</p>
+              <p>Lun 9:00 - Gómez (reprogramado)</p>
+              <p>Lun 9:30 - ...</p>
+              <p>Lun 10 - Martínez (llamó 2 veces)</p>
+              <p>Lun ¿10:30? - sin nombre</p>
+            </div>
+          </div>
+
+          <div class="agenda-col">
+            <h3>Agenda ordenada</h3>
+            <ul class="agenda-lista" id="agendaLista">
+              <li data-id="1"><span class="ag-hora">09:00</span><span class="ag-nombre">Rosa Pérez</span><span class="ag-estado">Pendiente</span></li>
+              <li data-id="2"><span class="ag-hora">09:30</span><span class="ag-nombre">Juan Gómez</span><span class="ag-estado">Pendiente</span></li>
+              <li data-id="3"><span class="ag-hora">10:00</span><span class="ag-nombre">Lucía Martínez</span><span class="ag-estado">Pendiente</span></li>
+              <li data-id="4"><span class="ag-hora">10:30</span><span class="ag-nombre">Diego Sosa</span><span class="ag-estado">Pendiente</span></li>
+            </ul>
+            <button type="button" class="boton-secundario" id="btnRecordatorios">Enviar recordatorios</button>
+          </div>
+        </div>
+
+        <p class="frase-despues">🟢 Después: un solo lugar, sin superposiciones, y el paciente recibe el recordatorio solo.</p>
+      </section>
+
+      <!-- ===================== 4. CATÁLOGO + PEDIDO ===================== -->
+      <section id="demo-catalogo" class="panel">
+        <span class="rubro-tag">Ejemplo: panadería</span>
+        <h2>Catálogo y pedido</h2>
+        <p class="frase-antes">🔴 Antes: el pedido se toma por teléfono o audio de WhatsApp, y a veces se olvida un producto o una cantidad.</p>
+
+        <div class="catalogo-demo">
+          <div class="catalogo-grilla" id="catalogoGrilla"></div>
+
+          <div class="catalogo-resumen">
+            <h3>Tu pedido</h3>
+            <ul id="resumenLista"><li class="vacio">Todavía no elegiste nada</li></ul>
+            <p class="catalogo-total">Total estimado: <strong id="resumenTotal">$0</strong></p>
+            <textarea id="mensajeWA" rows="5" readonly></textarea>
+            <button type="button" class="boton-secundario" id="btnCopiar">Copiar mensaje para WhatsApp</button>
+            <span class="aviso-copiado" id="copiadoAviso" hidden>¡Copiado!</span>
+          </div>
+        </div>
+
+        <p class="frase-despues">🟢 Después: el cliente arma su pedido solo y te llega el mensaje ya ordenado, listo para confirmar.</p>
+      </section>
+
+      <!-- ===================== 5. BANDEJA DE CONSULTAS ===================== -->
+      <section id="demo-consultas" class="panel">
+        <span class="rubro-tag">Ejemplo: centro de estética</span>
+        <h2>Bandeja de consultas</h2>
+        <p class="frase-antes">🔴 Antes: las consultas de Instagram, WhatsApp y mail se mezclan y no se sabe cuáles ya se resolvieron.</p>
+
+        <div class="kanban-demo" id="kanbanDemo">
+          <div class="kanban-columna" data-estado="nuevo">
+            <h3>Nuevo</h3>
+            <div class="kanban-tarjetas" data-lista="nuevo"></div>
+          </div>
+          <div class="kanban-columna" data-estado="proceso">
+            <h3>En proceso</h3>
+            <div class="kanban-tarjetas" data-lista="proceso"></div>
+          </div>
+          <div class="kanban-columna" data-estado="cerrado">
+            <h3>Cerrado</h3>
+            <div class="kanban-tarjetas" data-lista="cerrado"></div>
+          </div>
+        </div>
+
+        <p class="frase-despues">🟢 Después: cada consulta tiene un estado claro, y se ve de un vistazo qué falta resolver.</p>
+      </section>
+
+      <!-- ===================== 6. FICHA DE CLIENTE ===================== -->
+      <section id="demo-ficha" class="panel">
+        <span class="rubro-tag">Ejemplo: consultorio odontológico</span>
+        <h2>Ficha de paciente</h2>
+        <p class="frase-antes">🔴 Antes: para saber cuándo vino un paciente por última vez hay que revisar fichas de papel o carpetas sueltas.</p>
+
+        <div class="ficha-demo">
+          <input type="text" id="buscarCliente" placeholder="Buscá un paciente... probá 'Lucas', 'Martina' o 'Roberto'">
+          <div class="ficha-sugerencias" id="listaSugerencias"></div>
+          <div class="ficha-resultado" id="fichaResultado"></div>
+        </div>
+
+        <p class="frase-despues">🟢 Después: buscás el nombre y en dos segundos tenés todo el historial y el próximo turno.</p>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ===================== CTA FINAL ===================== -->
+  <section class="cta-final">
+    <div class="contenedor">
+      <div class="tarjeta">
+        <h2>¿Lo ves claro?</h2>
+        <p>Esto es una muestra genérica, con datos inventados. La versión real se arma con tu rubro, tus horarios y tus productos.</p>
+        <a href="index.html#agenda" class="boton">¿Lo ves claro? Agendá 20 minutos y te armo la versión para tu negocio</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Cinthia Calle. <a href="index.html">Volver al sitio</a></p>
+  </footer>
+
+  <script>
+    /* =========================================================
+       TABS: cambia entre las 6 demos
+    ========================================================= */
+    var tabBotones = document.querySelectorAll(".tab-boton");
+    var paneles = document.querySelectorAll(".panel");
+
+    tabBotones.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        tabBotones.forEach(function (b) { b.classList.remove("activo"); });
+        paneles.forEach(function (p) { p.classList.remove("activo"); });
+        btn.classList.add("activo");
+        document.getElementById(btn.dataset.target).classList.add("activo");
+      });
+    });
+
+    /* =========================================================
+       DEMO 1: WhatsApp de mentira (comercio de ropa)
+    ========================================================= */
+    var respuestasWA = {
+      horarios: "Abrimos de lunes a sábado de 10 a 20 hs. Los domingos cerramos 🙌",
+      precios: "Remeras desde $12.000, jeans desde $28.000 y camperas desde $45.000. ¡Cualquier duda seguimos por acá!",
+      stock: "Sí, nos queda en talles S, M y L. ¿Querés que te lo separemos?"
+    };
+
+    var waChat = document.getElementById("waChat");
+
+    document.querySelectorAll("[data-respuesta]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var burbuja = document.createElement("div");
+        burbuja.className = "wa-burbuja bot";
+        burbuja.textContent = respuestasWA[btn.dataset.respuesta];
+        waChat.appendChild(burbuja);
+        waChat.scrollTop = waChat.scrollHeight;
+      });
+    });
+
+    /* =========================================================
+       DEMO 2: Armador de presupuesto (taller mecánico)
+    ========================================================= */
+    var servicios = {
+      aceite: { nombre: "Cambio de aceite y filtro", precio: 25000, horas: 1 },
+      frenos: { nombre: "Cambio de pastillas de freno", precio: 60000, horas: 2 },
+      alineacion: { nombre: "Alineación y balanceo", precio: 20000, horas: 1 },
+      diagnostico: { nombre: "Diagnóstico general", precio: 15000, horas: 1 }
+    };
+
+    var ppServicio = document.getElementById("ppServicio");
+    var ppCantidad = document.getElementById("ppCantidad");
+    var ppUrgencia = document.getElementById("ppUrgencia");
+    var ppZona = document.getElementById("ppZona");
+    var ppResultado = document.getElementById("ppResultado");
+
+    function calcularPresupuesto() {
+      var servicio = servicios[ppServicio.value];
+      var cantidad = Math.max(1, parseInt(ppCantidad.value, 10) || 1);
+      var urgente = ppUrgencia.value === "urgente";
+      var domicilio = ppZona.value === "domicilio";
+
+      var total = servicio.precio * cantidad;
+      var detalles = [];
+
+      if (urgente) {
+        total = total * 1.2;
+        detalles.push("recargo por urgencia (+20%)");
+      }
+      if (domicilio) {
+        total = total + 8000;
+        detalles.push("visita a domicilio (+$8.000)");
+      }
+
+      var horas = servicio.horas * cantidad;
+      var totalTexto = "$" + Math.round(total).toLocaleString("es-AR");
+
+      ppResultado.innerHTML =
+        "<p>" + cantidad + "x " + servicio.nombre + (urgente ? ", urgente" : ", normal") + (domicilio ? ", a domicilio" : ", en el taller") + "</p>" +
+        "<p class=\"total\">" + totalTexto + "</p>" +
+        "<p>" + (detalles.length ? "Incluye " + detalles.join(" y ") + ". " : "") + "Tiempo estimado: " + horas + " hora" + (horas === 1 ? "" : "s") + ".</p>";
+    }
+
+    [ppServicio, ppCantidad, ppUrgencia, ppZona].forEach(function (campo) {
+      campo.addEventListener("input", calcularPresupuesto);
+      campo.addEventListener("change", calcularPresupuesto);
+    });
+
+    calcularPresupuesto();
+
+    /* =========================================================
+       DEMO 3: Antes/después de agenda (consultorio)
+    ========================================================= */
+    var btnRecordatorios = document.getElementById("btnRecordatorios");
+    var agendaItems = document.querySelectorAll("#agendaLista li");
+    var recordatoriosEnviados = false;
+
+    btnRecordatorios.addEventListener("click", function () {
+      if (recordatoriosEnviados) {
+        agendaItems.forEach(function (item) {
+          item.classList.remove("enviado");
+          item.querySelector(".ag-estado").textContent = "Pendiente";
+        });
+        btnRecordatorios.textContent = "Enviar recordatorios";
+        recordatoriosEnviados = false;
+        return;
+      }
+
+      btnRecordatorios.disabled = true;
+      agendaItems.forEach(function (item, indice) {
+        setTimeout(function () {
+          item.classList.add("enviado");
+          item.querySelector(".ag-estado").textContent = "Recordatorio enviado ✓";
+          if (indice === agendaItems.length - 1) {
+            btnRecordatorios.disabled = false;
+            btnRecordatorios.textContent = "Reiniciar demo";
+            recordatoriosEnviados = true;
+          }
+        }, indice * 450);
+      });
+    });
+
+    /* =========================================================
+       DEMO 4: Catálogo + pedido (panadería)
+    ========================================================= */
+    var productos = [
+      { id: "medialunas", nombre: "Medialunas (docena)", emoji: "🥐", precio: 4200 },
+      { id: "panfrances", nombre: "Pan francés (kg)", emoji: "🍞", precio: 2600 },
+      { id: "torta", nombre: "Torta de chocolate", emoji: "🎂", precio: 9800 },
+      { id: "baguette", nombre: "Baguette", emoji: "🥖", precio: 1900 },
+      { id: "galletitas", nombre: "Galletitas surtidas (1/4kg)", emoji: "🍪", precio: 3100 },
+      { id: "tarta", nombre: "Tarta de manzana", emoji: "🥧", precio: 7500 }
+    ];
+
+    var carrito = {};
+    var catalogoGrilla = document.getElementById("catalogoGrilla");
+
+    productos.forEach(function (producto) {
+      carrito[producto.id] = 0;
+
+      var card = document.createElement("div");
+      card.className = "producto-card";
+      card.innerHTML =
+        "<div class=\"producto-emoji\">" + producto.emoji + "</div>" +
+        "<div class=\"producto-nombre\">" + producto.nombre + "</div>" +
+        "<div class=\"producto-precio\">$" + producto.precio.toLocaleString("es-AR") + "</div>" +
+        "<div class=\"producto-stepper\">" +
+          "<button type=\"button\" data-accion=\"restar\" data-id=\"" + producto.id + "\">−</button>" +
+          "<span class=\"cantidad\" id=\"cant-" + producto.id + "\">0</span>" +
+          "<button type=\"button\" data-accion=\"sumar\" data-id=\"" + producto.id + "\">+</button>" +
+        "</div>";
+      catalogoGrilla.appendChild(card);
+    });
+
+    var resumenLista = document.getElementById("resumenLista");
+    var resumenTotal = document.getElementById("resumenTotal");
+    var mensajeWA = document.getElementById("mensajeWA");
+
+    function actualizarCatalogo() {
+      var items = productos.filter(function (p) { return carrito[p.id] > 0; });
+      var total = 0;
+
+      if (items.length === 0) {
+        resumenLista.innerHTML = "<li class=\"vacio\">Todavía no elegiste nada</li>";
+        mensajeWA.value = "";
+      } else {
+        resumenLista.innerHTML = "";
+        var lineas = [];
+        items.forEach(function (p) {
+          var subtotal = p.precio * carrito[p.id];
+          total += subtotal;
+          var li = document.createElement("li");
+          li.textContent = carrito[p.id] + "x " + p.nombre + " — $" + subtotal.toLocaleString("es-AR");
+          resumenLista.appendChild(li);
+          lineas.push("- " + carrito[p.id] + " " + p.nombre);
+        });
+
+        mensajeWA.value =
+          "Hola! Quiero hacer un pedido:\n" + lineas.join("\n") +
+          "\nTotal estimado: $" + total.toLocaleString("es-AR") +
+          "\n¿Me confirman disponibilidad? Gracias!";
+      }
+
+      resumenTotal.textContent = "$" + total.toLocaleString("es-AR");
+    }
+
+    catalogoGrilla.addEventListener("click", function (evento) {
+      var boton = evento.target.closest("button[data-accion]");
+      if (!boton) return;
+
+      var id = boton.dataset.id;
+      if (boton.dataset.accion === "sumar") {
+        carrito[id] = Math.min(20, carrito[id] + 1);
+      } else {
+        carrito[id] = Math.max(0, carrito[id] - 1);
+      }
+
+      document.getElementById("cant-" + id).textContent = carrito[id];
+      actualizarCatalogo();
+    });
+
+    document.getElementById("btnCopiar").addEventListener("click", function () {
+      if (!mensajeWA.value) return;
+
+      var avisoCopiado = document.getElementById("copiadoAviso");
+
+      function mostrarAviso() {
+        avisoCopiado.hidden = false;
+        setTimeout(function () { avisoCopiado.hidden = true; }, 2000);
+      }
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(mensajeWA.value).then(mostrarAviso).catch(function () {
+          mensajeWA.select();
+          document.execCommand("copy");
+          mostrarAviso();
+        });
+      } else {
+        mensajeWA.select();
+        document.execCommand("copy");
+        mostrarAviso();
+      }
+    });
+
+    /* =========================================================
+       DEMO 5: Bandeja de consultas (estética)
+    ========================================================= */
+    var consultas = [
+      { id: 1, nombre: "Caro L.", canal: "Instagram", mensaje: "¿Hacen depilación láser en zona de bikini?", estado: "nuevo" },
+      { id: 2, nombre: "Male", canal: "WhatsApp", mensaje: "Quería saber el precio de la limpieza facial", estado: "nuevo" },
+      { id: 3, nombre: "Fernanda", canal: "Mail", mensaje: "¿Tienen turno para mañana a la tarde?", estado: "proceso" },
+      { id: 4, nombre: "Euge", canal: "WhatsApp", mensaje: "¿Puedo cambiar el turno del jueves?", estado: "proceso" },
+      { id: 5, nombre: "Naty", canal: "Instagram", mensaje: "¡Gracias por el turno de hoy!", estado: "cerrado" }
+    ];
+
+    function renderKanban() {
+      document.querySelectorAll(".kanban-tarjetas").forEach(function (col) { col.innerHTML = ""; });
+
+      consultas.forEach(function (consulta) {
+        var columna = document.querySelector(".kanban-tarjetas[data-lista=\"" + consulta.estado + "\"]");
+
+        var tarjeta = document.createElement("div");
+        tarjeta.className = "kanban-tarjeta";
+        tarjeta.innerHTML =
+          "<span class=\"canal\">" + consulta.canal + "</span>" +
+          "<span class=\"nombre\">" + consulta.nombre + "</span>" +
+          "<p class=\"mensaje\">" + consulta.mensaje + "</p>" +
+          "<select data-id=\"" + consulta.id + "\">" +
+            "<option value=\"nuevo\">Nuevo</option>" +
+            "<option value=\"proceso\">En proceso</option>" +
+            "<option value=\"cerrado\">Cerrado</option>" +
+          "</select>";
+
+        tarjeta.querySelector("select").value = consulta.estado;
+        columna.appendChild(tarjeta);
+      });
+    }
+
+    document.getElementById("kanbanDemo").addEventListener("change", function (evento) {
+      if (evento.target.tagName !== "SELECT") return;
+      var id = parseInt(evento.target.dataset.id, 10);
+      var consulta = consultas.find(function (c) { return c.id === id; });
+      consulta.estado = evento.target.value;
+      renderKanban();
+    });
+
+    renderKanban();
+
+    /* =========================================================
+       DEMO 6: Ficha de cliente (dentista)
+    ========================================================= */
+    var pacientes = [
+      {
+        nombre: "Lucas Fernández",
+        historial: [
+          { fecha: "10/03/2026", motivo: "Limpieza" },
+          { fecha: "02/11/2025", motivo: "Caries en muela" }
+        ],
+        proximoTurno: "14/10/2026 · 10:30 — Control"
+      },
+      {
+        nombre: "Martina Ibáñez",
+        historial: [
+          { fecha: "20/01/2026", motivo: "Extracción" }
+        ],
+        proximoTurno: null
+      },
+      {
+        nombre: "Roberto Díaz",
+        historial: [
+          { fecha: "05/08/2025", motivo: "Blanqueamiento" },
+          { fecha: "12/04/2025", motivo: "Limpieza" }
+        ],
+        proximoTurno: "02/10/2026 · 16:00 — Blanqueamiento"
+      },
+      {
+        nombre: "Ana Torres",
+        historial: [
+          { fecha: "14/02/2026", motivo: "Ortodoncia - control mensual" }
+        ],
+        proximoTurno: "05/10/2026 · 09:00 — Control ortodoncia"
+      },
+      {
+        nombre: "Diego Molina",
+        historial: [
+          { fecha: "01/12/2025", motivo: "Urgencia por dolor" }
+        ],
+        proximoTurno: null
+      }
+    ];
+
+    var buscarCliente = document.getElementById("buscarCliente");
+    var listaSugerencias = document.getElementById("listaSugerencias");
+    var fichaResultado = document.getElementById("fichaResultado");
+
+    function mostrarFicha(paciente) {
+      var historialHTML = paciente.historial.map(function (item) {
+        return "<li><span>" + item.motivo + "</span><span class=\"fecha\">" + item.fecha + "</span></li>";
+      }).join("");
+
+      fichaResultado.innerHTML =
+        "<div class=\"tarjeta\">" +
+          "<h3>" + paciente.nombre + "</h3>" +
+          "<span class=\"ficha-turno\">" + (paciente.proximoTurno ? "Próximo turno: " + paciente.proximoTurno : "Sin turno agendado") + "</span>" +
+          "<ul class=\"ficha-historial\">" + historialHTML + "</ul>" +
+        "</div>";
+
+      listaSugerencias.innerHTML = "";
+    }
+
+    buscarCliente.addEventListener("input", function () {
+      var texto = buscarCliente.value.trim().toLowerCase();
+
+      if (texto.length === 0) {
+        listaSugerencias.innerHTML = "";
+        fichaResultado.innerHTML = "";
+        return;
+      }
+
+      var coincidencias = pacientes.filter(function (p) {
+        return p.nombre.toLowerCase().indexOf(texto) !== -1;
+      });
+
+      if (coincidencias.length === 1) {
+        mostrarFicha(coincidencias[0]);
+        return;
+      }
+
+      fichaResultado.innerHTML = "";
+
+      if (coincidencias.length === 0) {
+        listaSugerencias.innerHTML = "<p class=\"ficha-vacio\">No se encontró ningún paciente con ese nombre.</p>";
+        return;
+      }
+
+      listaSugerencias.innerHTML = coincidencias.map(function (p) {
+        return "<button type=\"button\" data-nombre=\"" + p.nombre + "\">" + p.nombre + "</button>";
+      }).join("");
+    });
+
+    listaSugerencias.addEventListener("click", function (evento) {
+      var boton = evento.target.closest("button[data-nombre]");
+      if (!boton) return;
+      var paciente = pacientes.find(function (p) { return p.nombre === boton.dataset.nombre; });
+      buscarCliente.value = paciente.nombre;
+      mostrarFicha(paciente);
+    });
+  </script>
+
+</body>
+</html>

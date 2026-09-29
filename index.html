@@ -69,6 +69,54 @@
 
   p { color: var(--color-texto-suave); }
 
+  /* ===== Menú superior ===== */
+  .menu {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: #fff;
+    border-bottom: 1px solid var(--color-borde);
+  }
+
+  .menu .contenedor {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    padding: 0.9rem 1.5rem;
+  }
+
+  .menu .marca {
+    font-weight: 700;
+    color: var(--color-acento);
+    text-decoration: none;
+    font-size: 1rem;
+  }
+
+  .menu .enlaces {
+    display: flex;
+    align-items: center;
+    gap: 1.3rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+  }
+
+  .menu .enlaces a {
+    color: var(--color-texto-suave);
+    text-decoration: none;
+    font-size: 0.92rem;
+  }
+
+  .menu .enlaces a:hover { color: var(--color-acento); }
+
+  .menu .enlaces .destacado {
+    color: var(--color-acento);
+    font-weight: 700;
+  }
+
   /* ===== Header ===== */
   header.hero {
     padding: 4.5rem 0 4rem;
@@ -323,6 +371,18 @@
 </head>
 <body>
 
+  <!-- ===================== MENÚ ===================== -->
+  <nav class="menu">
+    <div class="contenedor">
+      <a href="#" class="marca">Cinthia Calle</a>
+      <ul class="enlaces">
+        <li><a href="#como-trabajo">Cómo trabajo</a></li>
+        <li><a href="#faq">Preguntas frecuentes</a></li>
+        <li><a href="demo.html" class="destacado">Ver demo interactiva</a></li>
+      </ul>
+    </div>
+  </nav>
+
   <!-- ===================== HEADER ===================== -->
   <header class="hero">
     <div class="contenedor">
@@ -418,19 +478,23 @@
       <h2>Mirá cómo queda</h2>
       <span class="subrayado"></span>
       <p>
-        [Texto introductorio — placeholder]. Un ejemplo simple de cómo se ve
-        un proceso antes y después de automatizarlo.
+        Elegí tu rubro y probá vos mismo cómo se ve un proceso antes y
+        después de automatizarlo.
       </p>
 
       <div class="demo-caja">
-        <div class="demo-panel vacio">
+        <div class="demo-panel">
           <span class="etiqueta">Antes</span>
-          <p>[Espacio reservado para el ejemplo "antes" — se completa después]</p>
+          <p>Una bandeja de WhatsApp llena, una libreta de turnos y un pedido tomado de memoria.</p>
         </div>
-        <div class="demo-panel vacio">
+        <div class="demo-panel">
           <span class="etiqueta">Después</span>
-          <p>[Espacio reservado para el ejemplo "después" — se completa después]</p>
+          <p>Respuestas automáticas, agenda ordenada y el pedido armado solo, listo para confirmar.</p>
         </div>
+      </div>
+
+      <div class="caja-presupuesto">
+        <a href="demo.html" class="boton">Probar la demo interactiva</a>
       </div>
     </div>
   </section>
