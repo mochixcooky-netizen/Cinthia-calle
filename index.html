@@ -279,6 +279,35 @@
     text-align: center;
   }
 
+  /* ===== Burbujas de contacto (WhatsApp / Calendly) ===== */
+  .burbujas-contacto {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .burbuja {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.6rem;
+    border-radius: 20px 20px 20px 4px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.98rem;
+    box-shadow: var(--sombra);
+    transition: transform 0.15s ease;
+  }
+
+  .burbuja:hover { transform: translateY(-2px); }
+
+  .burbuja .icono-burbuja { font-size: 1.2rem; line-height: 1; }
+
+  .burbuja.whatsapp { background: #25d366; }
+  .burbuja.calendly { background: #0069ff; }
+
   /* ===== FAQ / acordeón ===== */
   .acordeon { margin-top: 1.5rem; }
 
@@ -598,8 +627,14 @@
       </div>
 
       <div class="caja-presupuesto">
-        <!-- Reemplazá este link por tu WhatsApp o calendario real: editalo en GitHub.com con el lápiz del archivo -->
-        <a href="https://wa.me/54911XXXXXXXX" class="boton" target="_blank" rel="noopener">Agendá la reunión de 20 minutos</a>
+        <div class="burbujas-contacto">
+          <a href="https://wa.me/message/6VW7LP33GEPPE1" class="burbuja whatsapp" target="_blank" rel="noopener">
+            <span class="icono-burbuja">💬</span> Escribime por WhatsApp
+          </a>
+          <a href="https://calendly.com/cinthia-calle" class="burbuja calendly" target="_blank" rel="noopener">
+            <span class="icono-burbuja">📅</span> Agendá en Calendly
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -707,8 +742,14 @@
           Contame tu proceso y te muestro cómo quedaría automatizado en tu
           negocio. Sin compromiso, sin números todavía.
         </p>
-        <!-- El link real del botón se agrega más adelante -->
-        <a href="#" class="boton">Agendá una reunión de 20 minutos</a>
+        <div class="burbujas-contacto">
+          <a href="https://wa.me/message/6VW7LP33GEPPE1" class="burbuja whatsapp" target="_blank" rel="noopener">
+            <span class="icono-burbuja">💬</span> Escribime por WhatsApp
+          </a>
+          <a href="https://calendly.com/cinthia-calle" class="burbuja calendly" target="_blank" rel="noopener">
+            <span class="icono-burbuja">📅</span> Agendá en Calendly
+          </a>
+        </div>
         <p class="aviso">Sin compromiso: es solo para ver si tiene sentido trabajar juntos.</p>
       </div>
     </div>
